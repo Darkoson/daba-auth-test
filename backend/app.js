@@ -13,6 +13,21 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(isAuth);
 
+/**
+ * Allowing cors policy when runing both front & backend on the same machine
+ * Setting the request methods & header that the application must accept
+ */
+
+app.use((req, res, next)=>{
+  res.setHeader('Access-Control-Allow-Origin','*')
+  res.setHeader('Access-Control-Allow-Methods','POST,GET,OPTIONS')
+  res.setHeader('Access-Control-Allow-Headers','Content-Type, Authorization')
+  if(req.method === 'OPTIONS'){ // just sending status 200 to the browser, incase of its test
+    return res.sendStatus(200)
+  }
+  next()
+})
+
 // configuration of the graphql endpoing
 app.use(
   "/graphql",

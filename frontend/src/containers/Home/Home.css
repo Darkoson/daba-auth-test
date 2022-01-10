@@ -1,0 +1,72 @@
+div.app_wrap{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.signup_wrap {
+  max-width: 70rem;
+  margin-top: 3rem;
+  border-radius: 0.5rem;
+}
+
+.home-title h2{
+    margin-bottom: 1rem;
+
+}
+
+.home-title p{
+    font-size: 16px;
+
+}
+
+div.card.home-card{
+    width: 100% !important;
+}
+
+div.profile_header{
+    width: 100%;
+    padding: 4rem;
+    font-size: 16px;
+     display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(0,0,0,.125);
+}
+
+div.profile_content{
+    width: 100%;
+    padding: 4rem;
+     display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    border-bottom: 1px solid rgba(0,0,0,.125);
+}
+
+div.profile_content.last{
+    border-bottom: none;
+}
+
+div.profile_label{
+    width: 30%;
+    font-size: 16px;
+    text-transform: uppercase;
+    color: gray;
+}
+
+div.profile_info{
+    width: 70%;
+    font-size: 16px;
+}
+
+div.profile_content img{
+    width: 80px;
+}
+
+div.profile_header a.ui.basic.button{
+     border-radius: 1rem;
+     padding: 1rem 3rem;
+}

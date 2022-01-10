@@ -19,7 +19,6 @@ type User{
     email: String!
     password: String!
     phone: String!
-    lastSignin: String
 }
 
 
@@ -31,6 +30,8 @@ type AuthData{
     bio: String!
     email: String!
     password: String!
+    lastLogin: String
+    tokenExpiration: Int!
 }
 
 type RootQuery{

@@ -2,7 +2,7 @@ const bcrypt = require("bcryptjs");
 const User = require("../../models/user");
 
 const jwt = require("jsonwebtoken");
-const {dateToString} = require('../../helpers/date')
+const {dateToString} = require('../../helpers/date');
 
 module.exports = {
 
@@ -49,6 +49,7 @@ module.exports = {
         phone:args.input.phone,
         email: args.input.email,
         password: hashedPassword,
+        lastLogin: new Date() // we are setting the first "last login" to the date the user is created
       });
 
       // persistence of the user into the database
@@ -88,14 +89,19 @@ module.exports = {
     const token = jwt.sign(
       { userId: user.id, email: user.email },
       `${process.env.BCRYPT_PRIVATE_KEY}`,
-      { expiresIn: "1h" }
+      { expiresIn: "1h" } // we are setting the token to expire in 1 hour
     );
     
     // preparing of the data to send to the user
     const userData = { 
       userId: user.id, 
-      email: user.email, 
       token, 
+      photo: user.photo, 
+      name: user.name, 
+      email: user.email,
+      password: user.password,
+      phone: user.phone,
+      bio: user.bio,
       tokenExpiration: 1,
       lastLogin: dateToString(user.lastLogin) 
      };

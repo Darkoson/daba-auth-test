@@ -1,0 +1,74 @@
+div.card {
+   border-radius: 3rem;
+}
+div.card-body h2 {
+    color: #3c3461;
+    font-weight: bold;
+}
+div.card-body h1 {
+    color: #000000;
+    font-weight: bold;
+    margin: 2rem 0;
+}
+div.card-body p {
+    margin-bottom: 2rem;
+    font-size: 18px;
+}
+
+div.ui.input {
+    width: 100% !important;
+    margin: 1rem 0;
+}
+
+.ui.input > input {
+    width: 100% !important;
+    padding: 1.5rem;
+    padding-left: 6rem !important;
+    font-size: 16px;
+    border-radius: 1rem !important;
+}
+
+.ui.input i {
+    font-size: 2rem;
+}
+
+button.w-100 {
+    border-radius: 1rem !important;
+    margin-bottom: 3rem;
+    font-size: 18px;
+}
+
+div.social{
+    padding: 2rem;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+div.social i{
+    border: 1px solid gray;
+    padding: 2rem;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    border-radius: 50px;
+    margin: 0 1rem;
+    
+}
+
+div.createdby{
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    color: gray;
+}
+
+div.createdby a{
+    color: gray;
+}
