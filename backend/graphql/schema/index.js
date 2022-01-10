@@ -41,7 +41,7 @@ type RootMutation{
     createUser(input: UserInput): User
     login(email: String!, password: String!): AuthData!
     updateUser(input: UserInput): User
-    uploadPhoto(url:String!)
+    uploadPhoto(url:String!): String
 }
 
 schema {

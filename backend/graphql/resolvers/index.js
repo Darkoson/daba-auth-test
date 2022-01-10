@@ -107,4 +107,44 @@ module.exports = {
 
      return userData
   },
+
+
+
+  updateUser: async ({input}) => {
+     // control of the any error or exception
+     try {
+       //change this by id****************
+      const existingUser = await User.findById({ email: input.email });
+
+      // making sure that the user exist
+      if (!existingUser) {
+        throw new Error("The user does not exist !");
+      }
+
+      // hashing the password before saving it, for security purpose
+      const hashedPassword = await bcrypt.hash(args.input.password, 12);
+
+      const user = new User({
+        photo: args.input.photo,
+        name: args.input.name,
+        bio: args.input.bio,
+        phone:args.input.phone,
+        email: args.input.email,
+        password: hashedPassword,
+      });
+
+      // update & persistence of the user into the database
+      const savedUser = await user.save();
+
+      // returning the newly created user
+      return { ...savedUser._doc };
+    } catch (error) {
+      throw error;
+    }
+  },
+
+
+  uploadPhoto: async ({url}) => {
+    return url
+  }
 };
