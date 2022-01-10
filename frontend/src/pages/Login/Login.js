@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Alert, Button, Card, Container, Form } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
-import { useAuth } from "../../../contexts/AuthContext";
+import { useAuth } from "../../contexts/AuthContext";
 import "./Login.css";
 
 const Login = () => {
@@ -21,17 +21,20 @@ const Login = () => {
 
   // handling submit
   const handleSubmit = async (e) => {
-	setLoading(true);
+    setLoading(true);
     e.preventDefault();
-    
-    const result = signin(emailRef.current.value, passwordRef.current.value);
-	
-	if(result.success){
-		history.push("/");
-	}else{
-		setError(result.data);
-	}
-	setLoading(false);
+
+    const result = await signin(
+      emailRef.current.value,
+      passwordRef.current.value
+    );
+
+    if (result.success) {
+      history.push("/");
+    } else {
+      setError(result.data);
+    }
+    setLoading(false);
   };
 
   // Component return

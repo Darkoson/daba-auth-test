@@ -33,8 +33,6 @@ exports.signin = (email, password) => {
     });
 };
 
-exports.signout = () => {};
-
 exports.updatePhoto = (url) => {};
 
 exports.updateProfile = (url) => {};

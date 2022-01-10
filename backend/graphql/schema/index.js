@@ -28,6 +28,7 @@ type AuthData{
     photo: String!
     name: String!
     bio: String!
+    phone: String!
     email: String!
     password: String!
     lastLogin: String

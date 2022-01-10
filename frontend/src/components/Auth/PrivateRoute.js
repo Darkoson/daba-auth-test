@@ -9,7 +9,6 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
     <Route
       {...rest}
       render={(props) => {
-        console.log('from private route:' , getCurrentUser());
         return getCurrentUser() ? 
         (<Component {...props} />) : (<Redirect to="/login" />);
       }}

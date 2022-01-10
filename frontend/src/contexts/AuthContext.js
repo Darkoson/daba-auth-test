@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, createContext, useState } from "react";
+import React, { useContext,  createContext, useState } from "react";
 
 const authService = require('../services/auth-serice')
 
@@ -18,7 +18,7 @@ const AuthProvider = ({ children }) => {
   // setting state
   const [currentUser, setCurrentUser] = useState();
   //const [loading, setLoading] = useState(false);
-
+ 
 
   const getCurrentUser = ()=>{
     let user = currentUser;
@@ -31,6 +31,7 @@ const AuthProvider = ({ children }) => {
 
   const updateCurrentUser  = (user) =>{
   
+    setCurrentUser(user)
     // case the user is not null, we are updating the current User with the new details
     if(user){
        // we are saving the user on the local storage
@@ -40,8 +41,6 @@ const AuthProvider = ({ children }) => {
     else{
       localStorage.removeItem(LOCAL_USER_KEY)
     }
-  
-    setCurrentUser(user)
   }
 
   // registration function
@@ -74,10 +73,7 @@ const AuthProvider = ({ children }) => {
   const signout = () => {
     // we are removing the user details from the local storage and from the state
     updateCurrentUser(null)
-    
   };
-
- 
 
   // object of current user
   const value = {

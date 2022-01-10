@@ -1,10 +1,9 @@
 import React, { useRef, useState } from "react";
 import { Form, Button, Card, Alert, Container } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
-import { useAuth } from "../../../contexts/AuthContext";
-import CustomNav from "../../CustomNav/CustomNav";
+import { useAuth } from "../../contexts/AuthContext";
+import CustomNav from "../../components/CustomNav/CustomNav";
 import "./UpdateProfile.css";
-import UserImage from "../../../assets/logo-auth.PNG";
 
 const UpdateProfile = (props) => {
 	// getting inputs

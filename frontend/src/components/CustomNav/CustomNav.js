@@ -5,28 +5,38 @@ import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import { useAuth } from "../../contexts/AuthContext";
-import "./CustomNav.css";
-import LOGO from "../../assets/logo-auth-lg.PNG";
 
-//
-const settings = ["My Profile", "Group Chat", "Logout"];
+import { useHistory } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext";
+import LOGO from "../../assets/logo-auth-lg.PNG";
+import "./CustomNav.css";
+
+
+
 
 export default function CustomNav() {
+
+	const history = useHistory();
 	// get current user
-	const { currentUser, logout } = useAuth();
-	const [anchorElNav, setAnchorElNav] = React.useState(null);
+	const { getCurrentUser, signout } = useAuth();
+	const [ setAnchorElNav] = React.useState(null);
 	const [anchorElUser, setAnchorElUser] = React.useState(null);
 
-	const handleOpenNavMenu = (event) => {
-		setAnchorElNav(event.currentTarget);
+	
+
+	// handling log out
+	const logoutHandler = async () => {
+		signout();
+		history.push("/login");
 	};
+
+
+
+
 	const handleOpenUserMenu = (event) => {
 		setAnchorElUser(event.currentTarget);
 	};
@@ -66,16 +76,16 @@ export default function CustomNav() {
 								}}
 								onClick={handleOpenUserMenu}
 								sx={{ p: 0 }}>
-								<button className="ui button drop">
+								<div className="ui button drop">
 									<Avatar
-										alt={currentUser.email}
+										alt={getCurrentUser().email}
 										src="/static/images/avatar/2.jpg"
 										className="userAvatar"
 										variant="rounded"
 									/>
 									<span>Xanthe Neal</span>
 									<i className="icon caret down"></i>
-								</button>
+								</div>
 							</IconButton>
 						</Tooltip>
 						<Menu
@@ -105,7 +115,7 @@ export default function CustomNav() {
 									Group Chat
 								</Typography>
 							</MenuItem>
-							<MenuItem onClick={handleCloseNavMenu} className="menuItem last">
+							<MenuItem onClick={logoutHandler} className="menuItem last">
 								<Typography textAlign="center">
 									<i className="icon sign-out"></i>
 									Logout
