@@ -26,6 +26,11 @@ const userSchema = new Schema({
     type: String,
     require: true,
   },
+  
+  lastLogin: {
+    type: Date,
+    require: false,
+  },
 });
 
 module.exports = mongoose.model("User", userSchema);
