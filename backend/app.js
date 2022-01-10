@@ -5,10 +5,13 @@ const grahpQlSchema = require('./graphql/schema/index')
 const grahpQlResolvers = require('./graphql/resolvers/index')
 
 const mongoose = require("mongoose");
+const isAuth = require('./middlewares/is-auth')
 const app = express();
 
+// setup of middlewares to use by our application
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(isAuth);
 
 // configuration of the graphql endpoing
 app.use(

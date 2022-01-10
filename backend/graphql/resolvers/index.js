@@ -109,15 +109,24 @@ module.exports = {
   },
 
 
+/**
+ * updateUser: This updates the current user's details in the system
+ * 
+ * @param  input : the user data to update
+ * @returns 
+ */
+  updateUser: async (args, req) => {
 
-  updateUser: async ({input}) => {
+    if(!req.isAuth){
+      throw new Error('User not authenticated !')
+    }
      // control of the any error or exception
      try {
-       //change this by id****************
-      const existingUser = await User.findById({ email: input.email });
+       //geting the current user by ID
+      const currentUser = await User.findById(req.userId);
 
-      // making sure that the user exist
-      if (!existingUser) {
+      // making sure that the user exist: (This just an extra verification)
+      if (!currentUser) {
         throw new Error("The user does not exist !");
       }
 
@@ -134,10 +143,10 @@ module.exports = {
       });
 
       // update & persistence of the user into the database
-      const savedUser = await user.save();
+      const updatedUser = await currentUser.save();
 
-      // returning the newly created user
-      return { ...savedUser._doc };
+      // returning the updated current user
+      return { ...updatedUser._doc };
     } catch (error) {
       throw error;
     }
