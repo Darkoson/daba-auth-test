@@ -87,7 +87,7 @@ module.exports = {
     const jwt = require("jsonwebtoken");
     const token = jwt.sign(
       { userId: user.id, email: user.email },
-      "myPrivateKey",
+      `${process.env.BCRYPT_PRIVATE_KEY}`,
       { expiresIn: "1h" }
     );
     
