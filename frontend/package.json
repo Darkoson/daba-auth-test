@@ -1,6 +1,8 @@
 {
   "name": "react-auth-app",
   "version": "1.0.0",
+  "description": "Frontend Authentication app using React",
+  "author": "Thomas Darko",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.7.1",
