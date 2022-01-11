@@ -1,12 +1,17 @@
 const endpoint = `http://localhost:5000/graphql`;
+const {getCurrentUser} = require('../contexts/AuthContext')
+
+const token = (getCurrentUser())? getCurrentUser().token : '';
 
 
 const sendRequest = (requestBody) =>{
+
   return fetch(endpoint, {
     method: "POST",
     body: JSON.stringify(requestBody),
     headers: {
       "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}` 
     },
   })
     .then((result) => result.json())
