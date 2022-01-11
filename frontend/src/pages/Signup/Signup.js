@@ -3,6 +3,7 @@ import { Form, Button, Card, Alert, Container } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import './signup.css'
+import LOGO from "../../assets/logo-auth-lg.PNG";
 
 const Signup = (props) => {
   // getting inputs
@@ -48,7 +49,7 @@ const Signup = (props) => {
 				<div className="w-100 signup_wrap">
 					<Card style={{ padding: "4rem" }}>
 						<Card.Body>
-							<h2 className="text-left md-4">devchallenges</h2>
+						<img src={LOGO} alt="Logo" width="200px" />
 							<h1 className="text-left md-4">
 								Join thousands of learners from around the world
 							</h1>

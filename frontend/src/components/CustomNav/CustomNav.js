@@ -28,18 +28,12 @@ export default  function  CustomNav() {
 
 	const user =  getCurrentUser()
 
-	console.log('current user in custom nav:',  getCurrentUser().email);
-	console.log('current user photo in custom nav:', user.photo);
-
 	
-
 	// handling log out
 	const logoutHandler = async () => {
 		signout();
 		history.push("/login");
 	};
-
-
 
 
 	const handleOpenUserMenu = (event) => {
@@ -81,15 +75,15 @@ export default  function  CustomNav() {
 								}}
 								onClick={handleOpenUserMenu}
 								sx={{ p: 0 }}>
-								<div className="ui button drop">
+								<div id="profile" className="ui button drop">
 									<Avatar
 										alt={user.name}
 										src="/static/images/avatar/2.jpg"
 										className="userAvatar"
 										variant="rounded"
 									/>
-									<span> { user.name || 'No name'} </span>
-									<i className="icon caret down"></i>
+									<span className="profile-name"> { user.name || 'No name'} <i className="icon caret down"></i> </span>
+									
 								</div>
 							</IconButton>
 						</Tooltip>

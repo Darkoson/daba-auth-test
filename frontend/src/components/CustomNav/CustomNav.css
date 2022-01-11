@@ -1,3 +1,19 @@
+#profile{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.profile-name {
+    font-size: 12px;
+    line-height: 10px;
+}
+
+.css-54qi11-MuiAvatar-root {
+    width: 32px !important;
+    height: 32px !important;
+}
+
 div.nav {
     display: flex !important;
     justify-content: space-between !important;

@@ -13,6 +13,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(isAuth);
 
+//setting a public folder to set static files and assets
+
 /**
  * Allowing cors policy when runing both front & backend on the same machine
  * Setting the request methods & header that the application must accept

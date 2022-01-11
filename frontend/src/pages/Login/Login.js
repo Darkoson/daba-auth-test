@@ -3,11 +3,12 @@ import { Alert, Button, Card, Container, Form } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import "./Login.css";
+import LOGO from "../../assets/logo-auth-lg.PNG";
 
 const Login = () => {
   // getting inputs
-  const emailRef = useRef("darkothomas80@gmail.com");
-  const passwordRef = useRef("thomas");
+  const emailRef = useRef("");
+  const passwordRef = useRef("");
 
   // making use of authentication values : signup func
   const { signin } = useAuth();
@@ -44,14 +45,14 @@ const Login = () => {
         <div className="w-100 signup_wrap">
           <Card style={{ padding: "4rem" }}>
             <Card.Body>
-              <h2 className="text-left md-4">devchallenges</h2>
-              <h1 className="text-left md-4">Login</h1>
+            <img src={LOGO} alt="Logo" width="200px" />
+              <h1 className="text-left md-4 mt-20">Login</h1>
               {error && <Alert variant="danger">{error}</Alert>}
               <Form onSubmit={handleSubmit}>
                 <div className="ui left icon input">
                   <input
                     type="text"
-                    defaultValue="darkothomas80@gmail.com"
+                    defaultValue=""
                     placeholder="example@email.com"
                     ref={emailRef}
                     required
@@ -61,7 +62,7 @@ const Login = () => {
                 <div className="ui left icon input">
                   <input
                     type="password"
-                    defaultValue="thomas"
+                    defaultValue=""
                     placeholder="your password"
                     ref={passwordRef}
                     required

@@ -2,7 +2,6 @@ const endpoint = `http://localhost:5000/graphql`;
 
 const sendRequest = (requestBody, token='') =>{
 
-  console.log('token in authservice sendrequest func:', token);
 
   return fetch(endpoint, {
     method: "POST",
@@ -60,7 +59,7 @@ exports.signin = (email, password) => {
 exports.updatePhoto = (url) => {};
 
 exports.updateProfile = (data) => {
-  console.log('data in authservice updateProfile func:', data);
+  
   let requestBody = {
     query: `
       mutation{
