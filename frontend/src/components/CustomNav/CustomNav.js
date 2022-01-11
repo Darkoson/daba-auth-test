@@ -18,13 +18,18 @@ import "./CustomNav.css";
 
 
 
-export default function CustomNav() {
+export default  function  CustomNav() {
 
 	const history = useHistory();
 	// get current user
 	const { getCurrentUser, signout } = useAuth();
 	const [ setAnchorElNav] = React.useState(null);
 	const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+	const user =  getCurrentUser()
+
+	console.log('current user in custom nav:',  getCurrentUser().email);
+	console.log('current user photo in custom nav:', user.photo);
 
 	
 
@@ -78,12 +83,12 @@ export default function CustomNav() {
 								sx={{ p: 0 }}>
 								<div className="ui button drop">
 									<Avatar
-										alt={getCurrentUser().email}
+										alt={user.name}
 										src="/static/images/avatar/2.jpg"
 										className="userAvatar"
 										variant="rounded"
 									/>
-									<span>Xanthe Neal</span>
+									<span> { user.name || 'No name'} </span>
 									<i className="icon caret down"></i>
 								</div>
 							</IconButton>

@@ -33,8 +33,8 @@ const Login = () => {
       history.push("/");
     } else {
       setError(result.data);
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   // Component return

@@ -40,7 +40,7 @@ const Home = () => {
                 <p>PHOTO</p>
               </div>
               <div className="profile_info">
-                <img src={user.photo} alt="thumbnail of the user" />
+                <img src={user.photo || 'None'} alt="thumbnail of the user" />
               </div>
             </div>
             <div className="profile_content">
@@ -48,7 +48,7 @@ const Home = () => {
                 <p>name</p>
               </div>
               <div className="profile_info">
-                <p>{user.name}</p>
+                <p>{user.name || 'None'}</p>
               </div>
             </div>
             <div className="profile_content">
@@ -56,7 +56,7 @@ const Home = () => {
                 <p>bio</p>
               </div>
               <div className="profile_info">
-                <p>{user.bio}</p>
+                <p>{user.bio || 'None'}</p>
               </div>
             </div>
             <div className="profile_content">
@@ -64,7 +64,7 @@ const Home = () => {
                 <p>phone</p>
               </div>
               <div className="profile_info">
-                <p>{user.phone}</p>
+                <p>{user.phone || 'None'}</p>
               </div>
             </div>
             <div className="profile_content">
@@ -72,7 +72,7 @@ const Home = () => {
                 <p>email</p>
               </div>
               <div className="profile_info">
-                <p>{user.email}</p>
+                <p>{user.email  || 'None'}</p>
               </div>
             </div>
             <div className="profile_content last">

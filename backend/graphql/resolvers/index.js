@@ -2,34 +2,31 @@ const bcrypt = require("bcryptjs");
 const User = require("../../models/user");
 
 const jwt = require("jsonwebtoken");
-const {dateToString} = require('../../helpers/date');
+const { dateToString } = require("../../helpers/date");
 
 module.exports = {
-
   /**
    * users: List of all users of the system
-   * 
+   *
    * @returns Array of Users
    */
   users: async () => {
     try {
       const users = await User.find();
-      return users.map((user) => ({ ...user._doc}));
+      return users.map((user) => ({ ...user._doc }));
     } catch (error) {
       throw error;
     }
   },
 
-
   /**
    * createUser: Creation of a new using (signup)
-   * 
-   * @param {*} args 
+   *
+   * @param {*} args
    * @returns User
    */
 
-   register: async ({email, password}) => {
-
+  register: async ({ email, password }) => {
     // control of the any error or exception
     try {
       const existingUser = await User.findOne({ email });
@@ -46,10 +43,10 @@ module.exports = {
         photo: "",
         name: "",
         bio: "",
-        phone:"",
+        phone: "",
         email,
         password: hashedPassword,
-        lastLogin: new Date() // we are setting the first "last login" to the date the user is created
+        lastLogin: new Date(), // we are setting the first "last login" to the date the user is created
       });
 
       // persistence of the user into the database
@@ -62,16 +59,14 @@ module.exports = {
     }
   },
 
-
   /**
    * login: The signin function
-   * 
-   * @param {email , password} : credentials provided by the user 
+   *
+   * @param {email , password} : credentials provided by the user
    * @returns AuthData
    */
 
   login: async ({ email, password }) => {
-
     // checking if the email provided is valid
     const user = await User.findOne({ email });
     if (!user) {
@@ -91,38 +86,36 @@ module.exports = {
       `${process.env.BCRYPT_PRIVATE_KEY}`,
       { expiresIn: "1h" } // we are setting the token to expire in 1 hour
     );
-    
+
     // preparing of the data to send to the user
-    const userData = { 
+    const userData = {
       ...user._doc,
-      password:'',
+      password: "",
       token,
       tokenExpiration: 1,
-      lastLogin: dateToString(user.lastLogin) 
-     };
+      lastLogin: dateToString(user.lastLogin),
+    };
 
-     //update of the time of last Login 
-     user.lastLogin = new Date()
-     await user.save()
+    //update of the time of last Login
+    user.lastLogin = new Date();
+    await user.save();
 
-     return userData
+    return userData;
   },
 
-
-/**
- * updateUser: This updates the current user's details in the system
- * 
- * @param  input : the user data to update
- * @returns 
- */
+  /**
+   * updateUser: This updates the current user's details in the system
+   *
+   * @param  input : the user data to update
+   * @returns
+   */
   updateUser: async (args, req) => {
-
-    if(!req.isAuth){
-      throw new Error('User not authenticated !')
+    if (!req.isAuth) {
+      throw new Error("User not authenticated !");
     }
-     // control of the any error or exception
-     try {
-       //geting the current user by ID
+    // control of the any error or exception
+    try {
+      //geting the current user by ID
       const currentUser = await User.findById(req.userId);
 
       // making sure that the user exist: (This just an extra verification)
@@ -130,17 +123,17 @@ module.exports = {
         throw new Error("The user does not exist !");
       }
 
-      // hashing the password before saving it, for security purpose
-      const hashedPassword = await bcrypt.hash(args.input.password, 12);
+      const data = args.input;
+      // hashing the password before saving it, incase it's been provided
 
-      const user = new User({
-        photo: args.input.photo,
-        name: args.input.name,
-        bio: args.input.bio,
-        phone:args.input.phone,
-        email: args.input.email,
-        password: hashedPassword,
-      });
+      currentUser.password = data.password
+        ? await bcrypt.hash(data.password, 12)
+        : currentUser.password;
+      currentUser.name = data.name ? data.name : currentUser.name;
+      currentUser.email = data.email ? data.email : currentUser.email;
+      currentUser.bio = data.bio ? data.bio : currentUser.bio;
+      currentUser.photo = data.photo ? data.photo : currentUser.photo;
+      currentUser.phone = data.phone ? data.phone : currentUser.phone;
 
       // update & persistence of the user into the database
       const updatedUser = await currentUser.save();
@@ -152,8 +145,7 @@ module.exports = {
     }
   },
 
-
-  uploadPhoto: async ({url}) => {
-    return url
-  }
+  uploadPhoto: async ({ url }) => {
+    return url;
+  },
 };

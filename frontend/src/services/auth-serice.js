@@ -1,10 +1,8 @@
 const endpoint = `http://localhost:5000/graphql`;
-const {getCurrentUser} = require('../contexts/AuthContext')
 
-const token = (getCurrentUser())? getCurrentUser().token : '';
+const sendRequest = (requestBody, token='') =>{
 
-
-const sendRequest = (requestBody) =>{
+  console.log('token in authservice sendrequest func:', token);
 
   return fetch(endpoint, {
     method: "POST",
@@ -43,9 +41,11 @@ exports.signin = (email, password) => {
               _id
               token
               name
+              bio
               email
               password
               photo
+              phone
               lastLogin
               tokenExpiration
           }
@@ -60,6 +60,7 @@ exports.signin = (email, password) => {
 exports.updatePhoto = (url) => {};
 
 exports.updateProfile = (data) => {
+  console.log('data in authservice updateProfile func:', data);
   let requestBody = {
     query: `
       mutation{
@@ -74,5 +75,5 @@ exports.updateProfile = (data) => {
       `
   };
 
-  return sendRequest(requestBody)
+  return sendRequest(requestBody,data.token)
 };

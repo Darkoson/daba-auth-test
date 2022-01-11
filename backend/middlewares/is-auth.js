@@ -3,6 +3,7 @@ module.exports = (req, res, next) => {
 
   // checking if the request's header has the authorization
   const authHeader = req.get("Authorization");
+  console.log('auth header in isAuth middleware:', authHeader);
   if (!authHeader) {
     req.isAuth = false;
     return next();
@@ -15,6 +16,7 @@ module.exports = (req, res, next) => {
     return next();
   }
 
+  
   // checking if the token is successfully decoded
   let decodedToken;
   try {
@@ -23,6 +25,8 @@ module.exports = (req, res, next) => {
     req.isAuth = false;
     return next();
   }
+  console.log('token in isAuth middleware:', token);
+  console.log('decoded token in isAuth middleware:', decodedToken);
 
   // Checking if the decoded token is valid
   if (!decodedToken) {

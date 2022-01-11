@@ -35,10 +35,12 @@ const UpdateProfile = (props) => {
 			name: nameRef.current.value.trim(),
 			bio: bioRef.current.value.trim(),
 			phone: phoneRef.current.value.trim(),
+			token: user.token //the authorization token that will be used to send the request
 		}
 
 		setLoading(true);
 		const result = await updateProfile(formData)
+		console.log('result in updateprofile:', result);
 		if(result.success){
 			history.push("/");
 		}
