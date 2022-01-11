@@ -44,23 +44,55 @@ const AuthProvider = ({ children }) => {
   }
 
   // registration function
-  const signup = (user) => {
+  const signup = async (email, password) => {
+    let result = {success:false, data:null}
     // calling of the service for signup
-    return authService.signup(user)
+    const response = await authService.signup(email, password)
+    // case the registration is not successful
+			if(response.errors){
+        result.data = response.errors[0].message
+			}
+      // case the registration is successful
+			else if(response.data.register){
+        result.success = true
+        result.data = response.data.register
+			}
+
+      return result; 
   };
 
   // login function
   const signin = async (email, password) => {
     let result = {success:false, data:null}
 
-    const authData = await authService.signin(email, password);
+    const response = await authService.signin(email, password);
     // case the login is not successful
-			if(authData.errors && authData.errors[0]){
-        result.data = authData.errors[0]
+			if(response.errors){
+        result.data = response.errors[0].message
 			}
       // case the user exist
-			else if(authData.data.login){
-				const user = authData.data.login
+			else if(response.data.login){
+				const user = response.data.login
+        updateCurrentUser(user)
+        result.success = true
+        result.data = user
+			}
+
+      return result; 
+  };
+
+  // updateProfile function
+  const updateProfile = async (formData) => {
+    let result = {success:false, data:null}
+
+    const response = await authService.updateProfile(formData);
+    // case the login is not successful
+			if(response.errors){
+        result.data = response.errors[0].message
+			}
+      // case the user is update successfully
+			else if(response.data.updateUser){
+				const user = response.data.updateUser
         updateCurrentUser(user)
         result.success = true
         result.data = user
@@ -80,7 +112,8 @@ const AuthProvider = ({ children }) => {
     getCurrentUser,
     signup,
     signin,
-    signout
+    signout,
+    updateProfile,
   };
 
   //AuthProvider component return

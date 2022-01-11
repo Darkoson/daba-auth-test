@@ -18,36 +18,35 @@ const UpdateProfile = (props) => {
 	const history = useHistory();
 
 	// making use of authentication values : signup func
-	const { currentUser, UpdateEmail, updatePassword } = useAuth();
+	const { getCurrentUser, updateProfile} = useAuth();
+	const user = getCurrentUser()
 
 	// state
 	const [error, setError] = useState("");
 	const [loading, setLoading] = useState(false);
 
 	// handling submit
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
-		// if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-		// 	return setError("Passwords do not match");
-		// }
 
-		// promises to handle changes
-		const promises = [];
+		const formData = {
+			email: emailRef.current.value.trim(),
+			password: passwordRef.current.value.trim(),
+			name: nameRef.current.value.trim(),
+			bio: bioRef.current.value.trim(),
+			phone: phoneRef.current.value.trim(),
+		}
+
 		setLoading(true);
-		setError("");
-		if (emailRef.current.value !== currentUser.email) {
-			promises.push(UpdateEmail(emailRef.current.value));
+		const result = await updateProfile(formData)
+		if(result.success){
+			history.push("/");
+		}
+		else{
+			setError(result.data);
+			setLoading(false);
 		}
 
-		if (passwordRef.current.value) {
-			promises.push(updatePassword(passwordRef.current.value));
-		}
-
-		//   run if all promises were successful
-		Promise.all(promises)
-			.then(() => history.push("/"))
-			.catch(() => setError("Update Failed! Try Again"))
-			.finally(() => setLoading(false));
 	};
 
 	// Component return
@@ -85,6 +84,7 @@ const UpdateProfile = (props) => {
 											<Form.Label>Name</Form.Label>
 											<Form.Control
 												type="text"
+												defaultValue={user.name}
 												ref={nameRef}
 												placeholder="Enter your name..."
 											/>
@@ -94,6 +94,7 @@ const UpdateProfile = (props) => {
 											<Form.Control
 												type="text"
 												as="textarea"
+												defaultValue={user.bio}
 												aria-label="With textarea"
 												ref={bioRef}
 												placeholder="Enter your bio..."
@@ -103,6 +104,7 @@ const UpdateProfile = (props) => {
 											<Form.Label>Phone</Form.Label>
 											<Form.Control
 												type="text"
+												defaultValue={user.phone}
 												ref={phoneRef}
 												placeholder="Enter your phone..."
 											/>
@@ -111,13 +113,14 @@ const UpdateProfile = (props) => {
 										<Form.Control
 											type="email"
 											ref={emailRef}
-											defaultValue={currentUser.email}
+											defaultValue={user.email}
 										/>
 									</Form.Group>
 									<Form.Group id="password" className="w-100 mt-3">
 										<Form.Label>Password</Form.Label>
 										<Form.Control
 											type="password"
+											defaultValue={user.password}
 											ref={passwordRef}
 											placeholder="Keep current password? Leave blank!"
 										/>

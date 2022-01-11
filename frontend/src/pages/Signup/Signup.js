@@ -23,21 +23,22 @@ const Signup = (props) => {
   // handling submit
   const handleSubmit = async (e) => {
     e.preventDefault();
+	let email = emailRef.current.value.trim()
+	let password = passwordRef.current.value.trim()
 
-    console.log(passwordRef.current.value);
-    console.log(emailRef.current.value);
-    // if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-    //   return setError("Passwords do not match");
-    // }
+    if(email && password){
+		setLoading(true);
+		const result = await signup(email, password)
+		if(result.success){
+			history.push("/login");
+		}
+		else{
+			setError(result.data);
+			setLoading(false);
+		}
+	}
+     
 
-    try {
-      setError("");
-      setLoading(true);
-      await signup(emailRef.current.value, passwordRef.current.value);
-      history.push("/");
-    } catch (error) {
-      setLoading(false);
-    }
   };
 
   // Component return
@@ -57,23 +58,23 @@ const Signup = (props) => {
 							</p>
 							{error && <Alert variant="danger">{error}</Alert>}
 							<Form onSubmit={handleSubmit}>
-								<div class="ui left icon input">
+								<div className="ui left icon input">
 									<input
 										type="text"
 										placeholder="Email"
 										ref={emailRef}
 										required
 									/>
-									<i class="envelope icon"></i>
+									<i className="envelope icon"></i>
 								</div>
-								<div class="ui left icon input">
+								<div className="ui left icon input">
 									<input
-										type="text"
+										type="password"
 										placeholder="Password"
 										ref={passwordRef}
 										required
 									/>
-									<i class="lock icon"></i>
+									<i className="lock icon"></i>
 								</div>
 
 								<Button
@@ -89,10 +90,10 @@ const Signup = (props) => {
 							</p> */}
 								</div>
 								<div className="w-100 text-center text-muted mt-2 social">
-									<i class="google icon"></i>
-									<i class="facebook icon"></i>
-									<i class="twitter icon"></i>
-									<i class="github icon"></i>
+									<i className="google icon"></i>
+									<i className="facebook icon"></i>
+									<i className="twitter icon"></i>
+									<i className="github icon"></i>
 								</div>
 								<div className="w-100 text-center text-muted mt-2">
 									<p>

@@ -4,19 +4,19 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
   photo: {
     type: String,
-    require: true,
+    require: false,
   },
   name: {
     type: String,
-    require: true,
+    require: false,
   },
   bio: {
     type: String,
-    require: true,
+    require: false,
   },
   phone: {
     type: String,
-    require: true,
+    require: false,
   },
   email: {
     type: String,

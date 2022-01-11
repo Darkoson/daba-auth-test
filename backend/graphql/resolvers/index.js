@@ -28,11 +28,11 @@ module.exports = {
    * @returns User
    */
 
-  createUser: async (args) => {
+   register: async ({email, password}) => {
 
     // control of the any error or exception
     try {
-      const existingUser = await User.findOne({ email: args.input.email });
+      const existingUser = await User.findOne({ email });
 
       // making sure that the email provided by the user does not exist
       if (existingUser) {
@@ -40,14 +40,14 @@ module.exports = {
       }
 
       // hashing the password before saving it, for security purpose
-      const hashedPassword = await bcrypt.hash(args.input.password, 12);
+      const hashedPassword = await bcrypt.hash(password, 12);
 
       const user = new User({
-        photo: args.input.photo,
-        name: args.input.name,
-        bio: args.input.bio,
-        phone:args.input.phone,
-        email: args.input.email,
+        photo: "",
+        name: "",
+        bio: "",
+        phone:"",
+        email,
         password: hashedPassword,
         lastLogin: new Date() // we are setting the first "last login" to the date the user is created
       });
@@ -94,14 +94,9 @@ module.exports = {
     
     // preparing of the data to send to the user
     const userData = { 
-      userId: user.id, 
-      token, 
-      photo: user.photo, 
-      name: user.name, 
-      email: user.email,
-      password: user.password,
-      phone: user.phone,
-      bio: user.bio,
+      ...user._doc,
+      password:'',
+      token,
       tokenExpiration: 1,
       lastLogin: dateToString(user.lastLogin) 
      };
@@ -109,7 +104,6 @@ module.exports = {
      //update of the time of last Login 
      user.lastLogin = new Date()
      await user.save()
-
 
      return userData
   },

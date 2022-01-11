@@ -7,8 +7,8 @@ input UserInput{
     name: String!
     bio: String!
     email: String!
-    password: String!
     phone: String!
+    password: String!
 }
 
 type User{
@@ -23,7 +23,7 @@ type User{
 
 
 type AuthData{
-    userId: ID!
+    _id: ID!
     token: String!
     photo: String!
     name: String!
@@ -40,7 +40,7 @@ type RootQuery{
 }
 
 type RootMutation{
-    createUser(input: UserInput): User
+    register(email: String!, password: String!): User
     login(email: String!, password: String!): AuthData!
     updateUser(input: UserInput): User
     uploadPhoto(url:String!): String
