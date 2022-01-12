@@ -4,7 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import CustomNav from "../../components/CustomNav/CustomNav";
 import "./UpdateProfile.css";
-import { backendEndpoint } from "../../setting";
+import { backendEndpoint, backendImageFolder } from "../../setting";
 
 const UpdateProfile = (props) => {
   // making use of authentication values
@@ -24,7 +24,7 @@ const UpdateProfile = (props) => {
   // state
   let defaultLink =
     user.photo !== "undefined" && user.photo !== ""
-      ? backendEndpoint + user.photo
+      ? backendEndpoint + backendImageFolder + user.photo
       : "images/avatar.png";
   const [image, setImage] = useState({ preview: defaultLink, data: "" });
 

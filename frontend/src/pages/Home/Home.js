@@ -5,7 +5,7 @@ import CustomNav from "../../components/CustomNav/CustomNav";
 import { useAuth } from "../../contexts/AuthContext";
 import "./Home.css";
 
-import { backendEndpoint } from "../../setting"
+import { backendEndpoint , backendImageFolder } from "../../setting"
 
 const Home = () => {
   // state
@@ -18,7 +18,7 @@ const Home = () => {
 
 
   let imageLink = (user.photo!=="undefined" && user.photo!=='')?
-  (backendEndpoint + user.photo) : 'images/avatar.png'
+  (backendEndpoint + backendImageFolder + user.photo) : 'images/avatar.png'
 
   return (
     <>

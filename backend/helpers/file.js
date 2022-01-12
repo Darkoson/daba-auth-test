@@ -39,10 +39,9 @@ exports.requestFileHandler = async  (req, res) => {
     
     currentUser.photo = req.file ? req.file.filename : "";
     const updatedUser = await currentUser.save();
-    console.log('updatedUser:' , updatedUser);
 
     // returning the updated current user
-    res.json({ photo: UPLOAD_DIR + updatedUser.photo })
+    res.json({ photo:  updatedUser.photo })
   } catch (error) {
     res.json(error)
   }

@@ -15,7 +15,7 @@ import { useAuth } from "../../contexts/AuthContext";
 import LOGO from "../../assets/logo-auth-lg.PNG";
 import "./CustomNav.css";
 
-import { backendEndpoint } from "../../setting"
+import { backendEndpoint, backendImageFolder } from "../../setting"
 
 
 
@@ -31,7 +31,7 @@ export default  function  CustomNav() {
 	const user =  getCurrentUser()
 
 	let imageLink = (user.photo!=="undefined" && user.photo!=='')?
-	(backendEndpoint + user.photo) : 'images/avatar.png'
+	(backendEndpoint + backendImageFolder+ user.photo) : 'images/avatar.png'
   
 	
 	// handling log out

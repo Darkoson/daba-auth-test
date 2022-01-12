@@ -132,7 +132,6 @@ module.exports = {
       currentUser.name = data.name ? data.name : currentUser.name;
       currentUser.email = data.email ? data.email : currentUser.email;
       currentUser.bio = data.bio ? data.bio : currentUser.bio;
-      currentUser.photo = data.photo ? data.photo : currentUser.photo;
       currentUser.phone = data.phone ? data.phone : currentUser.phone;
 
       // update & persistence of the user into the database

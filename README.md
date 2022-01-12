@@ -38,11 +38,17 @@
 
 ## Overview
 
-![screenshot](https://user-images.githubusercontent.com/16707738/92399059-5716eb00-f132-11ea-8b14-bcacdc8ec97b.png)
+![screenshot](https://drive.google.com/file/d/1lXlaORxGHPvSW-_uVGRXogZsGBToFLPL/view?usp=sharing)
 
 Introduce your projects by taking a screenshot, video recordings or a gif. Try to tell us about the solution you built by answering the following:
 
-- Where can I see your demo?
+- videos link:
+![Application](https)
+![Deployment](https)
+
+- Demonstration links?
+![Frontend](https)
+![Backend](https)
 
 - What was your experience building it:
 This is a very simple authentication system that requires good enderstanding of concepts like: components, modules, routes, api, middleware, graphql, models (in the context of MVC design pattern), database and many others.
