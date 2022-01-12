@@ -5,7 +5,7 @@ import CustomNav from "../../components/CustomNav/CustomNav";
 import { useAuth } from "../../contexts/AuthContext";
 import "./Home.css";
 
-import { backendEndpoint , backendImageFolder } from "../../setting"
+const { backendEndpoint, backendImageFolder }  = require( "../../setting");
 
 const Home = () => {
   // state

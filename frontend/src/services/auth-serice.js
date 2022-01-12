@@ -1,4 +1,7 @@
-const endpoint = `http://localhost:5000/graphql`;
+
+const  { backendEndpoint } = require("../setting");
+
+const endpoint = `${backendEndpoint}graphql`;
 
 const sendRequest = (requestBody, token='') =>{
 
@@ -59,8 +62,7 @@ exports.signin = (email, password) => {
 
 exports.updatePhoto = (data,token) => {
 
-  console.log('data sent in auth service:', data);
-  return fetch("http://localhost:5000/upload", {
+  return fetch(backendEndpoint+"upload", {
     method: "POST",
     body: data,
     headers: {

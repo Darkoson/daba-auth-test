@@ -4,7 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import CustomNav from "../../components/CustomNav/CustomNav";
 import "./UpdateProfile.css";
-import { backendEndpoint, backendImageFolder } from "../../setting";
+const { backendEndpoint, backendImageFolder }  = require( "../../setting");
 
 const UpdateProfile = (props) => {
   // making use of authentication values

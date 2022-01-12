@@ -1,2 +1,4 @@
-export  const backendEndpoint="http://localhost:5000/"
-export  const backendImageFolder="uploads/"
+module.exports = {
+  backendEndpoint: "http://localhost:5000/",
+  backendImageFolder: "uploads/",
+};

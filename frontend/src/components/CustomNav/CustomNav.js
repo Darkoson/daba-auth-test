@@ -15,7 +15,7 @@ import { useAuth } from "../../contexts/AuthContext";
 import LOGO from "../../assets/logo-auth-lg.PNG";
 import "./CustomNav.css";
 
-import { backendEndpoint, backendImageFolder } from "../../setting"
+const { backendEndpoint, backendImageFolder }  = require( "../../setting");
 
 
 
