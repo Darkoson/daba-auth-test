@@ -9,11 +9,13 @@ import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-
+import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import LOGO from "../../assets/logo-auth-lg.PNG";
 import "./CustomNav.css";
+
+import { backendEndpoint } from "../../setting"
 
 
 
@@ -23,11 +25,14 @@ export default  function  CustomNav() {
 	const history = useHistory();
 	// get current user
 	const { getCurrentUser, signout } = useAuth();
-	const [ setAnchorElNav] = React.useState(null);
+	const [ anchorElNav, setAnchorElNav] = React.useState(null);
 	const [anchorElUser, setAnchorElUser] = React.useState(null);
 
 	const user =  getCurrentUser()
 
+	let imageLink = (user.photo!=="undefined" && user.photo!=='')?
+	(backendEndpoint + user.photo) : 'images/avatar.png'
+  
 	
 	// handling log out
 	const logoutHandler = async () => {
@@ -39,6 +44,7 @@ export default  function  CustomNav() {
 	const handleOpenUserMenu = (event) => {
 		setAnchorElUser(event.currentTarget);
 	};
+	
 
 	const handleCloseNavMenu = () => {
 		setAnchorElNav(null);
@@ -78,7 +84,7 @@ export default  function  CustomNav() {
 								<div id="profile" className="ui button drop">
 									<Avatar
 										alt={user.name}
-										src="/static/images/avatar/2.jpg"
+										src={imageLink}
 										className="userAvatar"
 										variant="rounded"
 									/>
@@ -105,7 +111,8 @@ export default  function  CustomNav() {
 							<MenuItem onClick={handleCloseNavMenu} className="menuItem">
 								<Typography textAlign="center">
 									<i className="icon user circle"></i>
-									My Profile
+									<Link to="/">My Profile</Link>
+									
 								</Typography>
 							</MenuItem>
 							<MenuItem onClick={handleCloseNavMenu} className="menuItem">

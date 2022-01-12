@@ -1,11 +1,13 @@
 const express = require("express");
 const { graphqlHTTP } = require("express-graphql");
 
-const grahpQlSchema = require('./graphql/schema/index')
-const grahpQlResolvers = require('./graphql/resolvers/index')
+const grahpQlSchema = require("./graphql/schema/index");
+const grahpQlResolvers = require("./graphql/resolvers/index");
 
 const mongoose = require("mongoose");
-const isAuth = require('./middlewares/is-auth')
+const isAuth = require("./middlewares/is-auth");
+const { upload, requestFileHandler } = require("./helpers/file");
+
 const app = express();
 
 // setup of middlewares to use by our application
@@ -14,26 +16,27 @@ app.use(express.json());
 app.use(isAuth);
 
 //setting a public folder to set static files and assets
-
+app.use(express.static("./public"));
 /**
  * Allowing cors policy when runing both front & backend on the same machine
  * Setting the request methods & header that the application must accept
  */
 
-app.use((req, res, next)=>{
-  res.setHeader('Access-Control-Allow-Origin','*')
-  res.setHeader('Access-Control-Allow-Methods','POST,GET,OPTIONS')
-  res.setHeader('Access-Control-Allow-Headers','Content-Type, Authorization')
-  if(req.method === 'OPTIONS'){ // just sending status 200 to the browser, incase of its test
-    return res.sendStatus(200)
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "POST,GET,OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  if (req.method === "OPTIONS") {
+    // just sending status 200 to the browser, incase of its test
+    return res.sendStatus(200);
   }
-  next()
-})
+  next();
+});
 
 // configuration of the graphql endpoing
 app.use(
   "/graphql",
-  
+
   graphqlHTTP({
     schema: grahpQlSchema,
     rootValue: grahpQlResolvers,
@@ -41,7 +44,11 @@ app.use(
   })
 );
 
+//route for handling the upload of profile pictures
+app.post("/upload", upload.single("file"), requestFileHandler);
+
 app.get("/", (req, res, next) => {
+  
   res.send(" Welcome to my Graphql application ...");
 });
 

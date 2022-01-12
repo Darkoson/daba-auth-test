@@ -56,7 +56,23 @@ exports.signin = (email, password) => {
   
 };
 
-exports.updatePhoto = (url) => {};
+
+exports.updatePhoto = (data,token) => {
+
+  console.log('data sent in auth service:', data);
+  return fetch("http://localhost:5000/upload", {
+    method: "POST",
+    body: data,
+    headers: {
+      "Authorization": `Bearer ${token}` 
+    },
+  })
+    .then((result) => result.json())
+    .catch((error) => {
+      return JSON.stringify(error);
+    });
+};
+
 
 exports.updateProfile = (data) => {
   

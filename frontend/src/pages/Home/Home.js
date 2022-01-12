@@ -5,6 +5,8 @@ import CustomNav from "../../components/CustomNav/CustomNav";
 import { useAuth } from "../../contexts/AuthContext";
 import "./Home.css";
 
+import { backendEndpoint } from "../../setting"
+
 const Home = () => {
   // state
   const [error] = useState("");
@@ -13,6 +15,10 @@ const Home = () => {
   // get current user
   const { getCurrentUser } = useAuth();
   const user = getCurrentUser();
+
+
+  let imageLink = (user.photo!=="undefined" && user.photo!=='')?
+  (backendEndpoint + user.photo) : 'images/avatar.png'
 
   return (
     <>
@@ -40,7 +46,7 @@ const Home = () => {
                 <p>PHOTO</p>
               </div>
               <div className="profile_info">
-                <img src={user.photo || 'None'} alt="thumbnail of the user" />
+                <img src={imageLink} alt="thumbnail of the user" />
               </div>
             </div>
             <div className="profile_content">

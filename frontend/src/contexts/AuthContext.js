@@ -95,11 +95,28 @@ const AuthProvider = ({ children }) => {
     return result;
   };
 
+
+
+  // updateProfile function
+  const updateProfilePicture = async (formData) => {
+    let result = { success: false, data: null };
+    const token = getCurrentUser().token
+
+    const response = await authService.updatePhoto(formData,token);
+    if (response.errors) {
+      result.data = response.errors[0].message;
+    } else {
+      updateCurrentUser(response);
+      result.data = response
+      result.success = true;
+    }
+    return result;
+  };
+
   // updateProfile function
   const updateProfile = async (formData) => {
     let result = { success: false, data: null };
 
-    console.log('form data', formData);
     const response = await authService.updateProfile(formData);
     // case the login is not successful
     if (response.errors) {
@@ -128,6 +145,7 @@ const AuthProvider = ({ children }) => {
     signup,
     signin,
     signout,
+    updateProfilePicture,
     updateProfile,
   };
 

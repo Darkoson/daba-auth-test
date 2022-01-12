@@ -64,6 +64,7 @@ div.profile_info{
 
 div.profile_content img{
     width: 80px;
+    border-radius: 8px;
 }
 
 div.profile_header a.ui.basic.button{

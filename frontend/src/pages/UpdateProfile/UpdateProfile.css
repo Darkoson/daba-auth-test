@@ -1,8 +1,40 @@
-div.app_wrap{
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
+.profile-picture  {
+  margin: 30px 0;
+  display: inline-flex;
+  align-items: center;
+}
+.profile-picture-image  {
+  position: relative;
+}
+.profile-picture-image img {
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+}
+.profile-picture-image i {
+  position: absolute;
+  top: 20px; 
+  left: 25px;
+  color: rgb(226, 225, 225);
+
+}
+
+.profile-picture-text {
+  font-family: Noto Sans;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 18px;
+  letter-spacing: -0.035em;
+  text-align: left;
+  margin-left: 20px;
+}
+
+div.app_wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .signup_wrap {
@@ -11,40 +43,38 @@ div.app_wrap{
   border-radius: 0.5rem;
 }
 
-.back{
-    margin-bottom: 3rem;
-    font-size: 16px;
-    color: skyblue;
+.back {
+  margin-bottom: 3rem;
+  font-size: 16px;
+  color: skyblue;
 }
 
-.home-title p{
-    font-size: 16px;
-
+.home-title p {
+  font-size: 16px;
 }
 
-div.card.home-card{
-    width: 100% !important;
+div.card.home-card {
+  width: 100% !important;
 }
 
-div.profile_header{
-    width: 100%;
-    padding: 4rem;
-    font-size: 16px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: none;
+div.profile_header {
+  width: 100%;
+  padding: 4rem;
+  font-size: 16px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: none;
 }
 
-div.profile_title .form-control{
-    padding: 1.5rem 2rem;
-    border-radius: 1rem;
+div.profile_title .form-control {
+  padding: 1.5rem 2rem;
+  border-radius: 1rem;
 }
-
 
 button.update_btn {
-    font-size: 16px;
-    border-radius: 1rem;
-    padding: 0.5rem 2rem;
+  font-size: 16px;
+  border-radius: 1rem;
+  padding: 0.5rem 2rem;
 }
