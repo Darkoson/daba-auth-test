@@ -26,7 +26,6 @@ const UpdateProfile = (props) => {
     user.photo !== "undefined" && user.photo !== ""
       ? backendEndpoint + backendImageFolder + user.photo
       : "images/avatar.png";
-  const [image, setImage] = useState({ preview: defaultLink, data: "" });
 
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -70,10 +69,7 @@ const UpdateProfile = (props) => {
     formData.append("token", user.token);
 
     const result = await updateProfilePicture(formData);
-    if (result.success) {
-      setImage({ preview: backendEndpoint + user.photo, data: "" });
-    } else {
-      setImage({ preview: "images/avatar.png", data: "" });
+    if (!result.success) {
       setError(result.data);
       setLoading(false);
     }
