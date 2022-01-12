@@ -85,6 +85,8 @@ exports.updateProfile = (data) => {
               email
               password
               photo
+              phone
+              bio
           }
       }
       `
